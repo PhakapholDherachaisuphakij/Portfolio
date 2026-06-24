@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { supabase } from '../../lib/supabase';
+import { supabase, PROJECT_REF } from '../../lib/supabase';
 import { PROFILE_DATA } from '../../constants/profile';
-const PROJECT_REF = "isewznoytpettlrsdrtc";
 const CLOUD_PROFILE_FALLBACK = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets/profil.jpg`;
 
 const Hero = () => {

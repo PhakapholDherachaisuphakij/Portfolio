@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import { supabase, PROJECT_REF } from "../lib/supabase";
 import { socialLinks as StaticSocial, playerInfo as StaticPlayer, skills as StaticSkills, experience as StaticExp } from "../data/Data";
-const PROJECT_REF = "isewznoytpettlrsdrtc";
 const CLOUD_PROFILE_FALLBACK = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets/profil.jpg`;
 
 export default function CharacterStats() {

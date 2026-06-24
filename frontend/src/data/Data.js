@@ -1,5 +1,5 @@
 // Supabase Storage Mapping
-const PROJECT_REF = "isewznoytpettlrsdrtc";
+import { PROJECT_REF } from '../lib/supabase';
 const BASE_URL = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets`;
 const IOT_BASE_URL = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/IOT`;
 
@@ -34,6 +34,8 @@ const itfunslide = `${BASE_URL}/it-fun-slide.png`;
 const helloworld = `${BASE_URL}/accordion/helloworld.jpg`;
 const teacher = `${BASE_URL}/accordion/Teacher.jpg`;
 const ecom = `${BASE_URL}/ecom.png`;
+const jarvisTrade1 = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/projects/jarvis-trade-1.png`;
+
 
 // Starter Pack Images (Manual Array since import.meta.glob doesn't work for cloud URLs)
 export const starterPackImages = [
@@ -486,7 +488,18 @@ export const portfoliodata = [
       "This was my first collaborative full-stack project. I was responsible for designing the database schema, setting up backend routes, and integrating them with frontend components for seamless booking functionality.",
     link: "https://github.com/GodzK/Fullstack-Booking",
   },
+  {
+    projectname: "JarvisTrade AI — Premium Stock Analyzer",
+    description:
+      "เครื่องมือวิเคราะห์และคัดกรองหุ้นแบบอัจฉริยะในคลิกเดียว (1-Click Stock Screener) ออกแบบมาให้ทำงานโดยอัตโนมัติเพื่อตรวจสอบหุ้นที่น่าสนใจตามกลยุทธ์ Price Pullback พร้อมวิเคราะห์พื้นฐานรายได้ทางบัญชี และประเมินจุดแข็ง จุดอ่อน โอกาส และอุปสรรค (SWOT Analysis) ด้วย Gemini AI",
+    techStack: ["React", "CSS", "Node.js", "Express", "Gemini AI", "Yahoo Finance"],
+    picture: jarvisTrade1,
+    experience:
+      "พัฒนาตัวคัดกรองหุ้นแนวคิด Price Pullback อัตโนมัติ ผนวกกับการนำ AI (Gemini) มาช่วยทำ SWOT Analysis วิเคราะห์งบการเงินเรียลไทม์ และทำ UI สไตล์ Glassmorphism ที่สวยงามและลื่นไหล",
+    link: "https://github.com/GodzK/JarvisTrade",
+  },
 ];
+
 
 export const ActivityData = [
   {
