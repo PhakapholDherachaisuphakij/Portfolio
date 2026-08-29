@@ -615,8 +615,7 @@ export default function Home() {
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src =
-                    "https://frpbnexgcxfjpsrlsylt.supabase.co/storage/v1/object/public/portfolio-assets/assets/Project/yaiba.jfif";
+                  e.target.src = "/projects/pk-brain.png";
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />

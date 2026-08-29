@@ -1,7 +1,7 @@
 // Supabase Storage Mapping
-import { PROJECT_REF } from '../lib/supabase';
-const BASE_URL = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets`;
-const IOT_BASE_URL = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/IOT`;
+import { STORAGE_BASE_URL } from '../lib/supabase';
+const BASE_URL = `${STORAGE_BASE_URL}/assets`;
+const IOT_BASE_URL = `${STORAGE_BASE_URL}/IOT`;
 
 // Mapping variables to Cloud URLs (Zero manual imports!)
 const pkshop = `${BASE_URL}/pkshop.jfif`;
@@ -34,7 +34,7 @@ const itfunslide = `${BASE_URL}/it-fun-slide.png`;
 const helloworld = `${BASE_URL}/accordion/helloworld.jpg`;
 const teacher = `${BASE_URL}/accordion/Teacher.jpg`;
 const ecom = `${BASE_URL}/ecom.png`;
-const jarvisTrade1 = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/projects/jarvis-trade-1.png`;
+const jarvisTrade1 = `${STORAGE_BASE_URL}/projects/jarvis-trade-1.png`;
 const pkbrain = `/projects/pk-brain.png`;
 
 

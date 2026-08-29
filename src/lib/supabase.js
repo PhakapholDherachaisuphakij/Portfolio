@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://homelab.tail7d4c51.ts.net';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -15,8 +15,10 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
+export const STORAGE_BASE_URL = `${supabaseUrl}/storage/v1/object/public/portfolio-assets`;
 export const PROJECT_REF =
   import.meta.env.VITE_SUPABASE_PROJECT_REF ||
   (supabaseUrl && supabaseUrl.includes('supabase.co')
     ? supabaseUrl.replace('https://', '').split('.')[0]
-    : 'frpbnexgcxfjpsrlsylt');
+    : 'homelab');
+
