@@ -61,9 +61,7 @@ export default function Home() {
         if (pData && pData.length > 0) {
           setProjects(
             pData.map((p) => {
-              let pic = resolveImageUrl(p.image_url);
-              if (!pic || p.title?.toLowerCase().includes("brain"))
-                pic = "/projects/pk-brain.png";
+              let pic = resolveImageUrl(p.image_url) || "/projects/pk-brain.png";
               return {
                 projectname: p.title,
                 description: p.description,
