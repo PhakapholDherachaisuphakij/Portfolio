@@ -558,11 +558,11 @@ export const ActivityData = [
         activitypic: [iotmain, iot2, iot3, iot4, iot5],
       },
       {
-        activityTitle: "SIT HelloWorld 2026 - Indri (Frontend Instructor)",
+        activityTitle: "SIT HelloWorld 2026 — Indri (Frontend Instructor)",
         Semester: "Semester 1",
         image: it32Images[0],
         description:
-          "วิทยากรผู้สอนสาย Front-End ในค่าย SIT HelloWorld 2026 - Indri นำสำรวจ 1 ใน 4 เส้นทางผจญภัย ถ่ายทอดความรู้แก่น้องๆ: DOM Manipulation, Event Listeners & Handling และการเชื่อมต่อ REST API พร้อมปูพื้นฐานการสร้าง Interactive Web Application",
+          "Served as the Frontend Development Instructor for SIT HelloWorld 2026 — Indri, leading 1 of 4 specialized exploration tracks (Front-End, Back-End, Database, UX/UI). Taught first-year IT students core modern web fundamentals: DOM Manipulation, Event Listeners & Handling, Async/Await with REST API Fetching, and Robust Error Handling (try/catch & UI feedback).",
         activitypic: it32Images,
       },
     ],
