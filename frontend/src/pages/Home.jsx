@@ -4,6 +4,7 @@ import { supabase, PROJECT_REF } from "../lib/supabase";
 import {
   portfoliodata as StaticProjects,
   ActivityData as StaticActivities,
+  initialFlattenedActivities,
   experience as StaticExp,
   skills as StaticSkills,
   socialLinks as StaticSocial,
@@ -28,7 +29,7 @@ const colorCycle = [
 
 export default function Home() {
   const [projects, setProjects] = useState(StaticProjects);
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState(initialFlattenedActivities);
   const [experience, setExperience] = useState(StaticExp);
   const [skills, setSkills] = useState(StaticSkills);
   const [profile, setProfile] = useState(StaticPlayer);

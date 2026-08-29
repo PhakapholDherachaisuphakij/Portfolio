@@ -574,6 +574,16 @@ export const ActivityData = [
   },
 ];
 
+export const initialFlattenedActivities = ActivityData.flatMap((s) =>
+  s.Activity1.map((a) => ({
+    activityTitle: a.activityTitle,
+    badge: a.Semester || "Activity",
+    image: resolveImageUrl(a.image),
+    description: a.description,
+    activitypic: (a.activitypic || []).map(img => resolveImageUrl(img)),
+  }))
+);
+
 export const accordionItems = [
   {
     id: "cf",

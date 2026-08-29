@@ -1,24 +1,25 @@
 // src/pages/Activity.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ActivityData as StaticActivities, resolveImageUrl } from '../data/Data';
+import { ActivityData as StaticActivities, initialFlattenedActivities, resolveImageUrl } from '../data/Data';
 import { supabase } from '../lib/supabase';
 import ActivityCard from '../components/cards/ActivityCard';
 
 export default function Activity() {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState(initialFlattenedActivities);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(0);
 
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const { data: aData } = await supabase
+        const { data: aData, error } = await supabase
           .from('activities')
           .select('*')
           .order('order_idx', { ascending: true })
           .order('created_at', { ascending: false });
 
+        if (error) throw error;
         if (aData && aData.length > 0) {
           setActivities(
             aData.map((a) => {
@@ -37,20 +38,9 @@ export default function Activity() {
               };
             })
           );
-        } else {
-          const flattened = StaticActivities.flatMap((s) =>
-            s.Activity1.map((a) => ({
-              activityTitle: a.activityTitle,
-              badge: a.Semester || 'Activity',
-              image: a.image,
-              description: a.description,
-              activitypic: a.activitypic || [],
-            }))
-          );
-          setActivities(flattened);
         }
       } catch (err) {
-        console.error('Activity error:', err);
+        console.warn('Activity live fetch failed, using cached fallback:', err.message);
       }
     };
     fetchActivities();
