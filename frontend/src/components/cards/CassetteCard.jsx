@@ -1,5 +1,4 @@
-// src/components/cards/CassetteCard.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const badgeColors = {
   red: 'bg-cassette-red text-white',
@@ -20,6 +19,11 @@ const CassetteCard = ({
   className = '',
 }) => {
   const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [image]);
+
   const badgeStyle = badgeColors[theme] || badgeColors.red;
 
   const isLogo = image && (image.includes('3klogo') || image.includes('logo') || image.includes('devicon'));

@@ -93,14 +93,6 @@ export default function Home() {
 
               let pics = rawPics.map(img => resolveImageUrl(img));
 
-              if (
-                a.title?.toLowerCase().includes("starter pack") ||
-                a.title?.toLowerCase().includes("fundamental") ||
-                a.title?.includes("IT#32")
-              ) {
-                pics = starterPackImages;
-              }
-
               return {
                 activityTitle: a.title,
                 badge: a.period_label || a.semester || "Activity",
