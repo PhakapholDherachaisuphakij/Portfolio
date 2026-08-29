@@ -47,12 +47,16 @@ const jarvisTrade1 = `/projects/jarvis-trade-1.png`;
 const pkbrain = `/projects/pk-brain.png`;
 
 
-// Starter Pack Images (Manual Array with URL encoding & local photos)
-export const starterPackImages = [
+// IT#32 Starter Pack Images (Frontend Development Instructor)
+export const it32Images = [
   "/projects/SnapInsta.to_685388440_18394467226156852_7247978494648967506_n.webp",
   "/projects/SnapInsta.to_685724559_18394467217156852_3257151177691929481_n.webp",
   "/projects/SnapInsta.to_687991123_18394467208156852_5913201921442297285_n.webp",
   "/projects/SnapInsta.to_689453408_18394467199156852_1826435665510741877_n.webp",
+];
+
+// IT Fundamental Program Images (SIT KMUTT Photos)
+export const starterPackImages = [
   encodeURI(`${BASE_URL}/starterpack pk/sit_photo (2 of 96).jpg`),
   encodeURI(`${BASE_URL}/starterpack pk/sit_photo (13 of 115).jpg`),
   encodeURI(`${BASE_URL}/starterpack pk/sit_photo (14 of 115).jpg`),
@@ -553,6 +557,14 @@ export const ActivityData = [
           "My first hackathon experience at KMUTT, where I worked with a team to develop an AI-powered IoT web application using YOLO. I learned about rapid prototyping, AI integration, and project pitching.",
         activitypic: [iotmain, iot2, iot3, iot4, iot5],
       },
+      {
+        activityTitle: "IT#32 Starter Pack (Frontend Development Instructor)",
+        Semester: "Semester 1",
+        image: it32Images[0],
+        description:
+          "Taking on the role of Frontend Development Instructor for IT#32 Starter Pack, teaching first-year IT students at KMUTT about HTML, CSS, JavaScript, and modern UI development.",
+        activitypic: it32Images,
+      },
     ],
   },
   {
@@ -561,9 +573,9 @@ export const ActivityData = [
       {
         activityTitle: "IT Starter Pack (IT Fundamental Program)",
         Semester: "Semester 2",
-        image: starterPackImages[1],
+        image: starterPackImages[0],
         description:
-          "Taking on the role of Head of IT Fundamental An intensive IT fundamental program covering mindset, core IT concepts, hardware/software basics, and essential skills for IT students.",
+          "Taking on the role of Head of IT Fundamental: An intensive IT fundamental program covering mindset, core IT concepts, hardware/software basics, and essential skills for IT students.",
         activitypic: starterPackImages,
       },
     ],
