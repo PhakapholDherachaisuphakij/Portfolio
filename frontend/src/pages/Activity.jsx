@@ -1,7 +1,7 @@
 // src/pages/Activity.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ActivityData as StaticActivities } from '../data/Data';
+import { ActivityData as StaticActivities, resolveImageUrl } from '../data/Data';
 import { supabase } from '../lib/supabase';
 import ActivityCard from '../components/cards/ActivityCard';
 
@@ -21,18 +21,21 @@ export default function Activity() {
 
         if (aData && aData.length > 0) {
           setActivities(
-            aData.map((a) => ({
-              activityTitle: a.title,
-              badge: a.period_label || a.semester || 'Activity',
-              image: a.main_image,
-              description: a.description,
-              activitypic:
-                a.gallery && a.gallery.length > 0
-                  ? a.gallery
-                  : a.main_image
-                  ? [a.main_image]
-                  : [],
-            }))
+            aData.map((a) => {
+              const gallery = (a.gallery && a.gallery.length > 0
+                ? a.gallery
+                : a.main_image
+                ? [a.main_image]
+                : []).map(img => resolveImageUrl(img));
+
+              return {
+                activityTitle: a.title,
+                badge: a.period_label || a.semester || 'Activity',
+                image: resolveImageUrl(a.main_image || gallery[0]),
+                description: a.description,
+                activitypic: gallery,
+              };
+            })
           );
         } else {
           const flattened = StaticActivities.flatMap((s) =>

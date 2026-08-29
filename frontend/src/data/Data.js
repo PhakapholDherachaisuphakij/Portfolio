@@ -1,9 +1,18 @@
-// Supabase Storage Mapping
-import { STORAGE_BASE_URL } from '../lib/supabase';
-const BASE_URL = `${STORAGE_BASE_URL}/assets`;
-const IOT_BASE_URL = `${STORAGE_BASE_URL}/IOT`;
+// Static Asset Mapping (Served directly via Vercel / Local static public folder)
+export const resolveImageUrl = (url, fallback = '/projects/pk-brain.png') => {
+  if (!url) return fallback;
+  if (url.startsWith('/')) return url;
+  if (url.includes('/storage/v1/object/public/portfolio-assets/')) {
+    const relativePart = url.split('/storage/v1/object/public/portfolio-assets/')[1];
+    return `/${decodeURIComponent(relativePart)}`;
+  }
+  return url;
+};
 
-// Mapping variables to Cloud URLs (Zero manual imports!)
+const BASE_URL = '/assets';
+const IOT_BASE_URL = '/IOT';
+
+// Mapping variables to Public Static URLs (Zero Tailscale / Cloud Dependency!)
 const pkshop = `${BASE_URL}/pkshop.jfif`;
 const crypto = `${BASE_URL}/crypto.jfif`;
 const iot = `${BASE_URL}/iot.png`;
@@ -34,7 +43,7 @@ const itfunslide = `${BASE_URL}/it-fun-slide.png`;
 const helloworld = `${BASE_URL}/accordion/helloworld.jpg`;
 const teacher = `${BASE_URL}/accordion/Teacher.jpg`;
 const ecom = `${BASE_URL}/ecom.png`;
-const jarvisTrade1 = `${STORAGE_BASE_URL}/projects/jarvis-trade-1.png`;
+const jarvisTrade1 = `/projects/jarvis-trade-1.png`;
 const pkbrain = `/projects/pk-brain.png`;
 
 

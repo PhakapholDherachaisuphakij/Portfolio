@@ -9,6 +9,7 @@ import {
   socialLinks as StaticSocial,
   playerInfo as StaticPlayer,
   starterPackImages,
+  resolveImageUrl,
 } from "../data/Data";
 import ConstanceHeader from "../components/common/ConstanceHeader";
 import CassetteCard from "../components/cards/CassetteCard";
@@ -31,6 +32,7 @@ export default function Home() {
   const [experience, setExperience] = useState(StaticExp);
   const [skills, setSkills] = useState(StaticSkills);
   const [profile, setProfile] = useState(StaticPlayer);
+  const [socialLinks, setSocialLinks] = useState(StaticSocial);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(0);
@@ -39,6 +41,7 @@ export default function Home() {
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,7 +60,7 @@ export default function Home() {
         if (pData && pData.length > 0) {
           setProjects(
             pData.map((p) => {
-              let pic = p.image_url;
+              let pic = resolveImageUrl(p.image_url);
               if (!pic || p.title?.toLowerCase().includes("brain"))
                 pic = "/projects/pk-brain.png";
               return {
@@ -82,12 +85,14 @@ export default function Home() {
         if (aData && aData.length > 0) {
           setActivities(
             aData.map((a) => {
-              let pics =
+              let rawPics =
                 a.gallery && a.gallery.length > 0
                   ? a.gallery
                   : a.main_image
                     ? [a.main_image]
                     : [];
+
+              let pics = rawPics.map(img => resolveImageUrl(img));
 
               if (
                 a.title?.toLowerCase().includes("starter pack") ||
@@ -100,7 +105,7 @@ export default function Home() {
               return {
                 activityTitle: a.title,
                 badge: a.period_label || a.semester || "Activity",
-                image: pics[0] || a.main_image,
+                image: pics[0] || resolveImageUrl(a.main_image),
                 description: a.description,
                 activitypic: pics,
               };

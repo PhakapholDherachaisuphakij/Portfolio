@@ -1,7 +1,7 @@
 // src/pages/ProjectGrid.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { portfoliodata as StaticProjects } from '../data/Data';
+import { portfoliodata as StaticProjects, resolveImageUrl } from '../data/Data';
 import { supabase } from '../lib/supabase';
 import CassetteCard from '../components/cards/CassetteCard';
 
@@ -25,7 +25,7 @@ export default function ProjectGrid() {
         if (data && data.length > 0) {
           setProjects(
             data.map((p) => {
-              let pic = p.image_url;
+              let pic = resolveImageUrl(p.image_url);
               if (!pic || p.title?.toLowerCase().includes('brain')) pic = '/projects/pk-brain.png';
               return {
                 projectname: p.title,
