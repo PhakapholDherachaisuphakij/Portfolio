@@ -1,7 +1,7 @@
 // src/components/home/Hero.jsx
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { supabase, PROJECT_REF } from '../../lib/supabase';
+import { supabase, STORAGE_BASE_URL } from '../../lib/supabase';
 import { PROFILE_DATA } from '../../constants/profile';
 import MagneticButton from '../effects/MagneticButton';
 import GlitchText from '../effects/GlitchText';
@@ -10,7 +10,7 @@ import { soundFx } from '../../utils/soundFx';
 
 const QuantumCore = lazy(() => import('../3d/QuantumCore'));
 
-const CLOUD_PROFILE_FALLBACK = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets/profil.jpg`;
+const CLOUD_PROFILE_FALLBACK = `${STORAGE_BASE_URL}/assets/profil.jpg`;
 
 const Hero = () => {
   const [profile, setProfile] = useState(PROFILE_DATA);

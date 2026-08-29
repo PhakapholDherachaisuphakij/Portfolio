@@ -1,7 +1,7 @@
 // src/pages/CharactorStats.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase, PROJECT_REF } from '../lib/supabase';
+import { supabase, STORAGE_BASE_URL } from '../lib/supabase';
 import {
   socialLinks as StaticSocial,
   playerInfo as StaticPlayer,
@@ -9,7 +9,7 @@ import {
   experience as StaticExp,
 } from '../data/Data';
 
-const CLOUD_PROFILE_FALLBACK = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/assets/profil.jpg`;
+const CLOUD_PROFILE_FALLBACK = `${STORAGE_BASE_URL}/assets/profil.jpg`;
 
 export default function CharacterStats() {
   const [profile, setProfile] = useState(StaticPlayer);

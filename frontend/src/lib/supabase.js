@@ -15,7 +15,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
-export const PROJECT_REF = 'frpbnexgcxfjpsrlsylt';
-export const STORAGE_BASE_URL = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets`;
+export const STORAGE_BASE_URL = `${supabaseUrl}/storage/v1/object/public/portfolio-assets`;
+export const PROJECT_REF = 'homelab';
 
 
