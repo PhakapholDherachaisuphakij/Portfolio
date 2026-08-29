@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CONSTANCE SOUVILLE EDITORIAL BASE SYSTEM
+   ============================================ */
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #e84a3b;
+    color: #ffffff;
+  }
+
+  html {
+    scroll-behavior: auto; /* Handled by smooth scroll or native */
+    background: #f6f1ea;
+    color: #1e1c19;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f6f1ea;
+    color: #1e1c19;
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f6f1ea;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(30, 28, 25, 0.2);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(30, 28, 25, 0.4);
+  }
+}
+
+/* ============================================
+   SIGNATURE HAIRLINES & EDITORIAL STRUCTURE
+   ============================================ */
+@layer components {
+  /* TitleLine separator (span with horizontal hair line) */
+  .title-line {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .title-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(30, 28, 25, 0.12);
+    margin-left: 1.5rem;
+  }
+
+  .title-line-dark::after {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Thin hairline borders */
+  .border-hairline {
+    border: 1px solid rgba(30, 28, 25, 0.12);
+  }
+
+  .border-hairline-dark {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .border-hairline-b {
+    border-bottom: 1px solid rgba(30, 28, 25, 0.12);
+  }
+
+  .border-hairline-t {
+    border-top: 1px solid rgba(30, 28, 25, 0.12);
+  }
+
+  .border-hairline-t-dark {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Editorial Serif Heading */
+  .editorial-serif {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Cassette Card */
+  .cassette-card {
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cassette-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Infinite Marquee */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 10s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
