@@ -366,7 +366,7 @@ export const portfoliodata = [
     picture: pkbrain,
     experience:
       "ได้พัฒนาระบบบันทึกความรู้อัจฉริยะที่สามารถจัดการข้อมูลโปรเจกต์ ทักษะ และไอเดียแบบ end-to-end พร้อมใช้ AI ช่วยวิเคราะห์ ตั้งแท็ก และสรุปข้อมูลอัตโนมัติ",
-    link: "http://homelab.tail7d4c51.ts.net:5174",
+    link: "",
   },
   {
     projectname:
