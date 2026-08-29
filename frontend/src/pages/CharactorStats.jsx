@@ -15,16 +15,16 @@ export default function CharacterStats() {
     const fetchData = async () => {
       try {
         // Fetch Profile
-        const { data: pData } = await supabase.from('profiles').select('*').single();
+        const { data: pData } = await supabase.from('profiles').select('*').order('created_at', { ascending: false }).limit(1).maybeSingle();
         if (pData) {
           setPlayerInfo({
-            nickname: pData.nickname,
-            level: pData.level,
-            role: pData.role,
-            totalXP: pData.total_xp,
-            streak: pData.streak,
-            quote: pData.quote,
-            avatar: pData.avatar_url
+            nickname: pData.nickname || StaticPlayer.nickname,
+            level: pData.level || StaticPlayer.level,
+            role: pData.role || StaticPlayer.role,
+            totalXP: pData.total_xp || StaticPlayer.totalXP,
+            streak: pData.streak || StaticPlayer.streak,
+            quote: pData.quote || StaticPlayer.quote,
+            avatar: pData.avatar_url || CLOUD_PROFILE_FALLBACK
           });
         }
 

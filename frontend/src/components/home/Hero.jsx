@@ -14,18 +14,20 @@ const Hero = () => {
         const { data, error } = await supabase
           .from('profiles')
           .select('*')
-          .single();
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle();
         
         if (error) throw error;
         if (data) {
           setProfile({
             ...PROFILE_DATA,
-            name: data.name,
-            nickname: data.nickname,
-            title: data.role,
-            description: data.description,
+            name: data.name || PROFILE_DATA.name,
+            nickname: data.nickname || PROFILE_DATA.nickname,
+            title: data.role || PROFILE_DATA.title,
+            description: data.description || PROFILE_DATA.description,
             available: "Online & Calibrated", // Dynamic status if needed
-            avatar: data.avatar_url
+            avatar: data.avatar_url || CLOUD_PROFILE_FALLBACK
           });
         }
       } catch (err) {

@@ -30,7 +30,9 @@ const ProfileManage = () => {
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
-      .single();
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
     
     if (data) {
       setProfile(data);

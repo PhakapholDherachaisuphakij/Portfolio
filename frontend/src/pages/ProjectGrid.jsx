@@ -32,17 +32,19 @@ export default function ProjectGrid() {
 
         if (error) throw error;
 
-        const formatted = (data || []).map((p) => ({
-          projectname: p.title,
-          description: p.description,
-          techStack: p.tech_stack || [],
-          picture: p.image_url,
-          experience: p.experience_text,
-          link: p.link,
-        }));
-        
-        // Merge: Static first, then Dynamic
-        setProjects([...StaticProjects, ...formatted]);
+        if (data && data.length > 0) {
+          const formatted = data.map((p) => ({
+            projectname: p.title,
+            description: p.description,
+            techStack: p.tech_stack || [],
+            picture: p.image_url,
+            experience: p.experience_text,
+            link: p.link,
+          }));
+          setProjects(formatted);
+        } else {
+          setProjects(StaticProjects);
+        }
       } catch (err) {
         console.error("Supabase fetch error, using static fallback:", err);
         setProjects(StaticProjects);
@@ -102,21 +104,38 @@ export default function ProjectGrid() {
                     ? "linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%)"
                     : "radial-gradient(circle at top right, #e0f2fe 0%, #bae6fd 100%)";
 
+              const hasLink = Boolean(project.link && project.link.trim() !== '' && project.link !== '#');
+              const CardWrapper = hasLink ? 'a' : 'div';
+              const wrapperProps = hasLink
+                ? {
+                    href: project.link,
+                    target: '_blank',
+                    rel: 'noopener noreferrer'
+                  }
+                : {};
+
               return (
-                <a
+                <CardWrapper
                   key={project.projectname}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex flex-col bg-white dark:bg-surface-dark border-2 border-border-color rounded-3xl overflow-hidden hover:scale-[1.02] hover:border-primary transition-all duration-300 shadow-card"
+                  {...wrapperProps}
+                  className={`group relative flex flex-col bg-white dark:bg-surface-dark border-2 border-border-color rounded-3xl overflow-hidden transition-all duration-300 shadow-card ${
+                    hasLink ? 'hover:scale-[1.02] hover:border-primary cursor-pointer' : 'cursor-default'
+                  }`}
                 >
                   {/* Badge Tech (First item in stack) */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span
-                      className={`bg-white/90 backdrop-blur text-neutral-dark border-2 border-${theme.name} px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm`}
-                    >
-                      {project.techStack[0]}
-                    </span>
+                  <div className="absolute top-4 right-4 z-10 flex gap-1.5">
+                    {!hasLink && (
+                      <span className="bg-slate-800/90 backdrop-blur text-slate-300 border border-white/10 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider shadow-sm">
+                        Archived / Internal
+                      </span>
+                    )}
+                    {project.techStack && project.techStack[0] && (
+                      <span
+                        className={`bg-white/90 dark:bg-surface-dark/90 backdrop-blur text-neutral-dark dark:text-white border-2 border-${theme.name} px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm`}
+                      >
+                        {project.techStack[0]}
+                      </span>
+                    )}
                   </div>
 
                   {/* Image Area */}
@@ -134,21 +153,27 @@ export default function ProjectGrid() {
                     <img
                       src={project.picture}
                       alt={project.projectname}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className={`w-full h-full object-cover transition-transform duration-500 ${hasLink ? 'group-hover:scale-110' : ''}`}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://frpbnexgcxfjpsrlsylt.supabase.co/storage/v1/object/public/portfolio-assets/assets/Project/yaiba.jfif";
+                      }}
                     />
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white p-3 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                        <span className="material-symbols-outlined text-primary font-bold">
-                          open_in_new
-                        </span>
+                    {hasLink && (
+                      <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="bg-white p-3 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                          <span className="material-symbols-outlined text-primary font-bold">
+                            open_in_new
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-xl font-black text-slate-800 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors">
+                    <h3 className={`text-xl font-black text-slate-800 dark:text-white mb-2 line-clamp-1 transition-colors ${hasLink ? 'group-hover:text-primary' : ''}`}>
                       {project.projectname}
                     </h3>
                     <p className="text-slate-500 dark:text-slate-400 font-medium mb-6 text-sm flex-1 line-clamp-3">
@@ -157,7 +182,7 @@ export default function ProjectGrid() {
 
                     {/* Tech Stack List */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {project.techStack.map((tech) => (
+                      {(project.techStack || []).map((tech) => (
                         <span
                           key={tech}
                           className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold border-b-2 border-slate-200 dark:border-slate-700"
@@ -169,15 +194,21 @@ export default function ProjectGrid() {
 
                     {/* Pseudo Button */}
                     <div
-                      className={`w-full h-12 rounded-2xl bg-neutral-dark border-b-4 border-neutral-light text-white font-bold uppercase tracking-widest flex items-center justify-center gap-2 group-hover:brightness-110 active:border-b-0 active:translate-y-1 transition-all`}
+                      className={`w-full h-12 rounded-2xl text-white font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all ${
+                        hasLink 
+                          ? 'bg-neutral-dark border-b-4 border-neutral-light group-hover:brightness-110 active:border-b-0 active:translate-y-1'
+                          : 'bg-slate-700/60 border-b-2 border-slate-600/40 text-slate-300 cursor-default text-xs'
+                      }`}
                     >
-                      <span>Enter Quest</span>
-                      <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
-                        arrow_forward
-                      </span>
+                      <span>{hasLink ? 'Enter Quest' : 'Overview Only'}</span>
+                      {hasLink && (
+                        <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
+                          arrow_forward
+                        </span>
+                      )}
                     </div>
                   </div>
-                </a>
+                </CardWrapper>
               );
             })
           )}

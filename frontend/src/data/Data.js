@@ -35,6 +35,7 @@ const helloworld = `${BASE_URL}/accordion/helloworld.jpg`;
 const teacher = `${BASE_URL}/accordion/Teacher.jpg`;
 const ecom = `${BASE_URL}/ecom.png`;
 const jarvisTrade1 = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/projects/jarvis-trade-1.png`;
+const pkbrain = `https://${PROJECT_REF}.supabase.co/storage/v1/object/public/portfolio-assets/projects/pk-brain.png`;
 
 
 // Starter Pack Images (Manual Array since import.meta.glob doesn't work for cloud URLs)
@@ -358,6 +359,16 @@ export const experience = [
 
 export const portfoliodata = [
   {
+    projectname: "PK Brain – Second Brain System",
+    description:
+      "ศูนย์รวมความรู้ ทักษะ การงาน และเรื่องราวความก้าวหน้าของ PK บันทึกทุกอย่างไว้ที่นี่เพื่อต่อยอดในอนาคต พัฒนาด้วย Typhoon AI และ Supabase",
+    techStack: ["React", "TailwindCSS", "Node.js", "Express", "Typhoon AI", "Supabase", "Tailscale"],
+    picture: pkbrain,
+    experience:
+      "ได้พัฒนาระบบบันทึกความรู้อัจฉริยะที่สามารถจัดการข้อมูลโปรเจกต์ ทักษะ และไอเดียแบบ end-to-end พร้อมใช้ AI ช่วยวิเคราะห์ ตั้งแท็ก และสรุปข้อมูลอัตโนมัติ",
+    link: "http://homelab.tail7d4c51.ts.net:5174",
+  },
+  {
     projectname:
       "Next Js Landing Page of Demon Slayer: Kimetsu no Yaiba – Infinity Castle* arc. ",
     description:
@@ -415,14 +426,14 @@ export const portfoliodata = [
     link: "https://cogni-sync.vercel.app/",
   },
   {
-    projectname: "PKFLIX",
+    projectname: "PK Movie Hub (PKFLIX)",
     description:
       "An entertainment-themed web app inspired by Netflix, designed to simulate a movie streaming platform. It includes a dynamic UI with featured banners, media content, and filtering functionality. , and now i integrate a data to supabase now this project data is on cloud!☁️",
     techStack: ["React", "CSS", "Node.js", "Supabase"],
     picture: pkflix,
     experience:
       "This project improved my frontend design skills, especially in creating engaging user interfaces. I also practiced backend API handling and managing component-based layouts for media-heavy content.",
-    link: "https://pk-flix.vercel.app/",
+    link: "https://pk-movie-hub.vercel.app/",
   },
   {
     projectname: "Pheeraphat Portfolio",
@@ -450,7 +461,7 @@ export const portfoliodata = [
     picture: pkshop,
     experience:
       "This project deepened my understanding of full-stack development, especially in handling REST APIs, managing state in React, and structuring a MongoDB database for real-world e-commerce scenarios.",
-    link: "https://github.com/GodzK/PkShop",
+    link: "",
   },
   {
     projectname: "Phakaphol-Ecommerce-Template",
@@ -486,7 +497,7 @@ export const portfoliodata = [
     picture: Helloworld,
     experience:
       "This was my first collaborative full-stack project. I was responsible for designing the database schema, setting up backend routes, and integrating them with frontend components for seamless booking functionality.",
-    link: "https://github.com/GodzK/Fullstack-Booking",
+    link: "",
   },
   {
     projectname: "JarvisTrade AI — Premium Stock Analyzer",
@@ -496,7 +507,7 @@ export const portfoliodata = [
     picture: jarvisTrade1,
     experience:
       "พัฒนาตัวคัดกรองหุ้นแนวคิด Price Pullback อัตโนมัติ ผนวกกับการนำ AI (Gemini) มาช่วยทำ SWOT Analysis วิเคราะห์งบการเงินเรียลไทม์ และทำ UI สไตล์ Glassmorphism ที่สวยงามและลื่นไหล",
-    link: "https://github.com/GodzK/JarvisTrade",
+    link: "",
   },
 ];
 
@@ -581,7 +592,7 @@ export const socialLinks = [
   {
     id: "github",
     name: "Github",
-    link: "https://github.com/GodzK",
+    link: "",
     text: "Github",
     icon: "fa-github",
   },
