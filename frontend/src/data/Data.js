@@ -392,13 +392,24 @@ export const experience = [
 
 export const portfoliodata = [
   {
-    projectname: "PK Brain – Second Brain System",
+    projectname: "PK Brain – Second Brain & AI Command Center System",
     description:
-      "ศูนย์รวมสมองและศูนย์บัญชาการอัจฉริยะ (AI Command Center & Second Brain System) ของ PK ที่ทำหน้าที่เชื่อมต่อทั้ง PK Ecosystem (Portfolio, PK Movie Hub) เข้าด้วยกันอย่างสมบูรณ์แบบ ขับเคลื่อนด้วย Typhoon AI (LLM), Node.js, Express, React, TailwindCSS, Supabase Self-Hosted PostgreSQL และ Cloudinary Enterprise CDN ระบบรองรับการสกัดความรู้ภาษาไทยอัตโนมัติ (Quick Logger), การสนทนาพร้อมแนบรูปภาพหลายไฟล์ (Multimodal Vision), การอนุมัติผลงานเข้า Portfolio แบบ Zero-Git Commit, ระบบค้นหาประวัติย้อนหลัง (Chat History Sidebar), คลังความรู้ปักหมุด (Knowledge Vault with Pin/Edit), และ Portfolio Studio สำหรับบริหารจัดการข้อมูลแบบครบวงจร",
-    techStack: ["React", "TailwindCSS", "Node.js", "Express", "Typhoon AI", "Supabase", "Cloudinary CDN", "Tailscale", "Vite"],
+      "PK Brain is the digital second brain and autonomous AI command center built by Phakaphol to orchestrate his entire digital ecosystem (PK Brain, Portfolio, and PK Movie Hub / PKFLIX) into a unified single source of truth. Powered by Typhoon AI (LLM), Node.js, Express, React, TailwindCSS, Self-Hosted Supabase PostgreSQL, and Cloudinary Enterprise CDN. Features include automated Thai knowledge extraction (Quick Logger), multimodal vision chat with multi-image attachments, zero-git live portfolio proposal approval, chat history session management, pinned knowledge vault with in-place editing, and full CRUD Portfolio Studio.",
+    techStack: [
+      "React 18",
+      "TailwindCSS",
+      "Node.js",
+      "Express.js",
+      "Typhoon AI (LLM)",
+      "Supabase PostgreSQL",
+      "Cloudinary CDN",
+      "Tailscale Mesh VPN",
+      "Vite",
+      "Vercel Edge"
+    ],
     picture: pkbrain,
     experience:
-      "ได้ออกแบบและพัฒนาระบบสถาปัตยกรรมระดับองค์กร (Enterprise Hybrid Cloud Architecture) ที่ยืดหยุ่นและรองรับความผิดพลาดสูง (Fault-Tolerant): 1. Single Source of Truth: เชื่อมต่อ 3 โปรเจกต์หลัก (PK Brain, Portfolio, PK Movie Hub) ผ่าน Supabase Self-Hosted PostgreSQL เดียวกัน 2. Multi-Tier CDN & Zero-Git Deployment: แก้ปัญหารูปภาพพังข้ามเครือข่าย โดยสร้าง Pipeline อัปโหลดรูปภาพเข้า Cloudinary Enterprise CDN อัตโนมัติร่วมกับ Express Storage Proxy ทำให้รูปแสดงผลได้ 0ms ทุกอุปกรณ์ทั่วโลกโดยไม่ต้องพึ่งพา Git Commit 3. Network Resiliency & Graceful Degradation: ออกแบบระบบ AbortController ในฝั่ง Client เพื่อตัดการรอการเชื่อมต่อข้ามเครือข่ายของอุปกรณ์ที่ไม่มี Tailscale ภายใน 2.5 วินาที ทำให้ผู้เข้าชมพอร์ตโฟลิโอบน Vercel สามารถโหลดข้อมูลและรูปภาพได้อย่างราบรื่น 100% 4. AI-Driven Portfolio Automation: นำ Typhoon LLM มาสกัดบทเรียนและสร้าง Portfolio Proposals อัตโนมัติ ช่วยลดเวลาการอัปเดตผลงานจากเดิมที่ต้องเขียนโค้ดและ Push ขึ้น Git ให้เหลือเพียงการกด Approve แค่คลิกเดียว",
+      "Designed and built an enterprise-grade hybrid cloud architecture emphasizing fault-tolerance, zero-git automation, and cross-network resiliency: 1. Single Source of Truth Ecosystem: Connected PK Brain, Portfolio (Vercel), and PK Movie Hub (PKFLIX) to a unified self-hosted Supabase PostgreSQL engine. 2. AI-Driven Live Portfolio Automation: Integrated Typhoon LLM to parse daily learning logs and auto-generate Portfolio Proposals. Phakaphol approves proposals with a single click, updating the live database and Vercel showcase instantaneously with zero git commits required. 3. Multi-Tier CDN & Cross-Network Asset Pipeline: Solved cross-network media loading issues across Home Wi-Fi, Tailscale Mesh VPN, and public edge networks by engineering a 3-tier upload pipeline (Cloudinary Enterprise CDN -> Catbox Free CDN -> Local Supabase Storage). Media is delivered worldwide at 0ms with automatic WebP compression. 4. Network Resiliency & Graceful Degradation: Implemented client-side AbortController timeouts (2.5s) and smart URL resolution (resolveImageUrl). When non-Tailscale external visitors access Vercel, network hanging is prevented and the application gracefully falls back to Cloudinary CDN assets, guaranteeing 100% image availability everywhere. 5. Zero Repo Bloat: Removed local disk binary writes from git tracking via .gitignore, preserving a lightweight git codebase while hosting 100% of media on high-availability CDNs.",
     link: "http://homelab.tail7d4c51.ts.net:5174",
   },
   {
