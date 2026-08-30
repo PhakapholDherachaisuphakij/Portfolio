@@ -36,6 +36,7 @@ export default function Home() {
   const [socialLinks, setSocialLinks] = useState(StaticSocial);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeProjImageIdx, setActiveProjImageIdx] = useState(0);
+  const [fullscreenImage, setFullscreenImage] = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(0);
 
@@ -603,22 +604,32 @@ export default function Home() {
       {/* Case Study Modal */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative w-full max-w-3xl max-h-[90vh] bg-paper rounded-[28px] overflow-hidden flex flex-col border border-hairline shadow-2xl text-ink"
+            className="relative w-full max-w-4xl max-h-[92vh] bg-paper rounded-[28px] overflow-hidden flex flex-col border border-hairline shadow-2xl text-ink"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close */}
-            <button
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-5 right-5 z-20 p-2.5 rounded-full bg-ink text-white hover:bg-cassette-red transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg">close</span>
-            </button>
+            {/* Header Action Bar */}
+            <div className="px-6 py-4 border-b border-hairline bg-paper-dark flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cassette-red text-white shrink-0">
+                  {selectedProject.link ? 'Live Deployment' : 'Case Study'}
+                </span>
+                <h2 className="text-lg sm:text-xl font-bold font-sans truncate text-ink">
+                  {selectedProject.projectname}
+                </h2>
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="p-2 rounded-full bg-ink text-white hover:bg-cassette-red transition-colors shrink-0 ml-3"
+              >
+                <span className="material-symbols-outlined text-base">close</span>
+              </button>
+            </div>
 
-            {/* Media Banner Carousel */}
+            {/* 100% Uncropped Full-Frame Media Stage */}
             {(() => {
               const gallery = Array.isArray(selectedProject.gallery) && selectedProject.gallery.length > 0
                 ? selectedProject.gallery
@@ -626,78 +637,76 @@ export default function Home() {
               const currentImg = gallery[activeProjImageIdx] || selectedProject.picture;
 
               return (
-                <div className="relative w-full bg-ink flex flex-col shrink-0">
-                  <div className="h-64 sm:h-80 w-full relative overflow-hidden">
+                <div className="relative w-full bg-neutral-950 flex flex-col shrink-0">
+                  <div className="relative w-full h-[40vh] sm:h-[50vh] flex items-center justify-center p-3 sm:p-4 group">
                     <img
                       src={currentImg}
                       alt={selectedProject.projectname}
-                      className="w-full h-full object-cover transition-all duration-300"
+                      onClick={() => setFullscreenImage(currentImg)}
+                      className="max-w-full max-h-full object-contain rounded-xl shadow-2xl border border-white/10 cursor-zoom-in transition-all duration-300 group-hover:scale-[1.01]"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = "/projects/pk-brain.png";
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85" />
-                    
+
+                    {/* Fullscreen Zoom Hint */}
+                    <button
+                      onClick={() => setFullscreenImage(currentImg)}
+                      className="absolute bottom-4 right-4 z-10 px-3 py-1.5 rounded-full bg-black/75 hover:bg-cassette-red text-white text-[11px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md border border-white/10 transition-all opacity-80 group-hover:opacity-100"
+                    >
+                      <span className="material-symbols-outlined text-sm">fullscreen</span>
+                      <span>Full Image</span>
+                    </button>
+
                     {/* Navigation Arrows if Multiple Images */}
                     {gallery.length > 1 && (
-                      <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none">
+                      <>
                         <button
                           onClick={() => setActiveProjImageIdx((prev) => (prev - 1 + gallery.length) % gallery.length)}
-                          className="pointer-events-auto p-2 rounded-full bg-black/60 text-white hover:bg-cassette-red transition-all backdrop-blur-xs"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/70 text-white hover:bg-cassette-red transition-all backdrop-blur-md border border-white/10 hover:scale-110"
                         >
-                          <span className="material-symbols-outlined text-base">arrow_back</span>
+                          <span className="material-symbols-outlined text-lg">arrow_back</span>
                         </button>
                         <button
                           onClick={() => setActiveProjImageIdx((prev) => (prev + 1) % gallery.length)}
-                          className="pointer-events-auto p-2 rounded-full bg-black/60 text-white hover:bg-cassette-red transition-all backdrop-blur-xs"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/70 text-white hover:bg-cassette-red transition-all backdrop-blur-md border border-white/10 hover:scale-110"
                         >
-                          <span className="material-symbols-outlined text-base">arrow_forward</span>
+                          <span className="material-symbols-outlined text-lg">arrow_forward</span>
                         </button>
-                      </div>
+                      </>
                     )}
-
-                    <div className="absolute bottom-4 left-6 right-6 text-white">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="px-3 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cassette-red text-white inline-block">
-                          {selectedProject.link ? "Live Deployment" : "Case Study"}
-                        </span>
-                        {gallery.length > 1 && (
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/20 backdrop-blur-xs text-white">
-                            📷 {activeProjImageIdx + 1} / {gallery.length} Images
-                          </span>
-                        )}
-                      </div>
-                      <h2 className="text-2xl sm:text-3xl font-serif">
-                        {selectedProject.projectname}
-                      </h2>
-                    </div>
                   </div>
 
                   {/* Thumbnail Strip */}
                   {gallery.length > 1 && (
-                    <div className="px-6 py-2.5 bg-paper-dark border-hairline-b flex items-center gap-2 overflow-x-auto">
-                      {gallery.map((imgUrl, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setActiveProjImageIdx(i)}
-                          className={`relative h-12 w-20 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                            activeProjImageIdx === i
-                              ? 'border-cassette-red scale-105 shadow-md'
-                              : 'border-transparent opacity-60 hover:opacity-100'
-                          }`}
-                        >
-                          <img src={imgUrl} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />
-                        </button>
-                      ))}
+                    <div className="px-6 py-3 bg-neutral-900 border-t border-white/10 flex items-center justify-center gap-3 overflow-x-auto">
+                      <span className="text-[11px] font-mono text-neutral-400 font-bold uppercase shrink-0">
+                        Gallery ({activeProjImageIdx + 1}/{gallery.length}):
+                      </span>
+                      <div className="flex items-center gap-2 overflow-x-auto py-1">
+                        {gallery.map((imgUrl, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setActiveProjImageIdx(i)}
+                            className={`relative h-14 w-24 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
+                              activeProjImageIdx === i
+                                ? 'border-cassette-red scale-105 shadow-lg ring-2 ring-cassette-red/50'
+                                : 'border-neutral-700 opacity-50 hover:opacity-100'
+                            }`}
+                          >
+                            <img src={imgUrl} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
               );
             })()}
 
-            {/* Content */}
-            <div className="p-8 overflow-y-auto space-y-6 flex-1">
+            {/* Scrollable Content */}
+            <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1">
               <div>
                 <h4 className="text-xs font-mono font-bold text-ink-muted uppercase tracking-widest mb-3">
                   Technologies Deployed
@@ -706,7 +715,7 @@ export default function Home() {
                   {(selectedProject.techStack || []).map((t, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 rounded-full bg-paper-dark border-hairline text-xs font-mono font-bold text-ink"
+                      className="px-3 py-1 rounded-full bg-paper-dark border border-hairline text-xs font-mono font-bold text-ink"
                     >
                       {t}
                     </span>
@@ -718,28 +727,28 @@ export default function Home() {
                 <h4 className="text-xs font-mono font-bold text-ink-muted uppercase tracking-widest mb-2">
                   Synopsis
                 </h4>
-                <p className="text-ink text-sm sm:text-base leading-relaxed">
+                <p className="text-ink text-sm sm:text-base leading-relaxed whitespace-pre-line">
                   {selectedProject.description}
                 </p>
               </div>
 
               {selectedProject.experience && (
-                <div className="p-5 rounded-2xl bg-paper-dark border-hairline space-y-2">
+                <div className="p-5 rounded-2xl bg-paper-dark border border-hairline space-y-2">
                   <div className="text-xs font-mono font-bold text-cassette-red uppercase tracking-wider">
                     Engineering Insights
                   </div>
-                  <p className="text-xs text-ink leading-relaxed">
+                  <p className="text-xs sm:text-sm text-ink leading-relaxed whitespace-pre-line">
                     {selectedProject.experience}
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Footer */}
-            <div className="p-5 border-hairline-t bg-paper-dark flex items-center justify-between gap-4">
+            {/* Modal Footer */}
+            <div className="p-5 border-t border-hairline bg-paper-dark flex items-center justify-between gap-4 shrink-0">
               <button
                 onClick={() => setSelectedProject(null)}
-                className="px-5 py-2.5 rounded-full bg-paper hover:bg-white text-xs font-mono font-bold text-ink transition-all border-hairline"
+                className="px-5 py-2.5 rounded-full bg-paper hover:bg-white text-xs font-mono font-bold text-ink transition-all border border-hairline"
               >
                 Close Window
               </button>
@@ -748,7 +757,7 @@ export default function Home() {
                   href={selectedProject.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 rounded-full bg-cassette-red hover:brightness-110 text-white text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-full bg-cassette-red hover:brightness-110 text-white text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2 shadow-md"
                 >
                   <span>Launch Live Site</span>
                   <span className="material-symbols-outlined text-sm">
@@ -758,6 +767,26 @@ export default function Home() {
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Fullscreen Image Lightbox Overlay */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 z-[2000] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
+          onClick={() => setFullscreenImage(null)}
+        >
+          <button
+            onClick={() => setFullscreenImage(null)}
+            className="absolute top-6 right-6 z-10 p-3 rounded-full bg-white/20 text-white hover:bg-cassette-red transition-all"
+          >
+            <span className="material-symbols-outlined text-xl">close</span>
+          </button>
+          <img
+            src={fullscreenImage}
+            alt="Fullscreen view"
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/10"
+          />
         </div>
       )}
 
