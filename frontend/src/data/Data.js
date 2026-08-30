@@ -414,15 +414,15 @@ export const portfoliodata = [
   },
   {
     projectname: "PK Notes (Obsidian + Hermes AI Workspace)",
-    description: "Modern Notion-style Block Editor integrated with local Obsidian Markdown Vault, serverless access control, and Typhoon AI Copilot.",
-    techStack: ["React 18", "Obsidian", "TailwindCSS", "Typhoon AI", "Supabase Cloud", "Vercel Serverless"],
+    description: "ระบบคลังความรู้ส่วนตัวและพื้นที่จดโน้ตแบบ Notion-style ที่เชื่อมต่อกับ Obsidian Vault ในเครื่องของผม ผสานพลังกับ Typhoon 30B AI Copilot (Hermes) ภายใต้สถาปัตยกรรม Zero-Trust Serverless และระบบอนุมัติสิทธิ์ส่วนกลางผ่าน PK Brain",
+    techStack: ["React 18", "Obsidian Markdown", "TailwindCSS", "Typhoon 30B AI", "Supabase Cloud", "Vercel Serverless", "Cloudinary CDN"],
     picture: "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211437.png",
     gallery: [
       "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211437.png",
       "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211449.png",
       "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211516.png"
     ],
-    experience: "Engineered a zero-trust serverless workspace featuring rate-limited request submission, instant static vault snapshots, Notion-style block editing with slash commands (/h1, /code, /table), private note lock screens, and centralized approval via PK Brain.",
+    experience: "เบื้องหลังการออกแบบและแก้ปัญหาจริงจากมุมมองของผม (Phakaphol):\n\n1. ปัญหาและความเสี่ยงที่พบ (Challenges Encountered):\n- ผมจดโน้ตวิชา KMUTT และงาน SCB QA ไว้ใน Obsidian เครื่องตัวเอง แต่เมื่อต้องการแชร์ให้เพื่อนอ่านหรือใช้งานบนเว็บ ผมพบความเสี่ยงเรื่องการแอบใช้งาน AI Copilot (Typhoon 30B) จากผู้ไม่หวังดีและการยิง DDoS สแปมสร้างบัญชี\n- นอกจากนี้ เน็ตบ้านหรือเซิร์ฟเวอร์ Homelab อาจมีช่วงไฟดับหรือเน็ตตัด ทำให้ถ้าต่อตรงเข้าเครื่องอย่างเดียว เว็บจะล่มและใช้งานไม่ได้\n\n2. สถาปัตยกรรมและการแก้ไขปัญหา (Engineering Solutions):\n- Zero-Trust & Centralized PK Brain Approval: ผมยกเลิกระบบรหัสผ่านลัด (Admin PIN) ออกทั้งหมด เพื่อไม่ให้มี Backdoor โดยเปิดทางเดียวให้ผู้ใช้ส่งคำขอ (Name, Email, Password, Reason) ไปยัง Supabase Cloud แล้วผมเป็นผู้กด '✅ Approve' อนุมัติสิทธิ์ด้วยตัวเองผ่าน PK Brain Hub บน Tailscale เท่านั้น\n- Zero-Downtime Static Snapshot: ผมเขียนสคริปต์ดึงไฟล์ Markdown จาก Obsidian ในเครื่องมาคอมไพล์เป็น Static Snapshot ฝังในเว็บ Vercel เมื่อเซิร์ฟเวอร์บ้านดับ ระบบจะสลับมาใช้ Snapshot ภายใน 0ms ทำให้คนทั่วไปยังเปิดอ่านและค้นหาความรู้ได้ 24/7 แบบไม่มีวันล่ม\n- Modern Block Editor & Mobile UX: สร้าง Notion-style Editor รองรับ Slash Commands (/h1, /code, /table) พร้อมระบบ Private Note 🔒 สำหรับล็อกโน้ตส่วนตัว และออกแบบ Responsive Sliding Drawer สำหรับสมาร์ทโฟน ใช้งานลื่นไหลทุกอุปกรณ์",
     link: "https://pk-notes-three.vercel.app/"
   },
   {
