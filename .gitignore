@@ -25,3 +25,5 @@ dist-ssr
 
 
 .env
+frontend/public/uploads/*
+!frontend/public/uploads/.gitkeep
