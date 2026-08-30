@@ -413,6 +413,19 @@ export const portfoliodata = [
     link: "http://homelab.tail7d4c51.ts.net:5174",
   },
   {
+    projectname: "PK Notes (Obsidian + Hermes AI Workspace)",
+    description: "Modern Notion-style Block Editor integrated with local Obsidian Markdown Vault, serverless access control, and Typhoon AI Copilot.",
+    techStack: ["React 18", "Obsidian", "TailwindCSS", "Typhoon AI", "Supabase Cloud", "Vercel Serverless"],
+    picture: "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211437.png",
+    gallery: [
+      "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211437.png",
+      "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211449.png",
+      "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/Screenshot_2026-08-30_211516.png"
+    ],
+    experience: "Engineered a zero-trust serverless workspace featuring rate-limited request submission, instant static vault snapshots, Notion-style block editing with slash commands (/h1, /code, /table), private note lock screens, and centralized approval via PK Brain.",
+    link: "https://pk-notes-three.vercel.app/"
+  },
+  {
     projectname:
       "Next Js Landing Page of Demon Slayer: Kimetsu no Yaiba – Infinity Castle* arc. ",
     description:

@@ -35,6 +35,7 @@ export default function Home() {
   const [profile, setProfile] = useState(StaticPlayer);
   const [socialLinks, setSocialLinks] = useState(StaticSocial);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeProjImageIdx, setActiveProjImageIdx] = useState(0);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(0);
 
@@ -68,11 +69,16 @@ export default function Home() {
           setProjects(
             pData.map((p) => {
               let pic = resolveImageUrl(p.image_url) || "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/1787993100216-e11aa45b.png";
+              let gal = Array.isArray(p.gallery) && p.gallery.length > 0
+                ? p.gallery.map((url) => resolveImageUrl(url))
+                : [pic];
+
               return {
                 projectname: p.title,
                 description: p.description,
                 techStack: p.tech_stack || [],
                 picture: pic,
+                gallery: gal,
                 experience: p.experience_text,
                 link: p.link,
               };
@@ -324,7 +330,10 @@ export default function Home() {
                   index={String(idx + 1).padStart(2, "0")}
                   theme={theme}
                   image={project.picture}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setActiveProjImageIdx(0);
+                  }}
                 />
               );
             })}
@@ -609,27 +618,83 @@ export default function Home() {
               <span className="material-symbols-outlined text-lg">close</span>
             </button>
 
-            {/* Media Banner */}
-            <div className="h-64 w-full relative overflow-hidden shrink-0 bg-ink">
-              <img
-                src={selectedProject.picture}
-                alt={selectedProject.projectname}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/projects/pk-brain.png";
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-6 left-8 right-8 text-white">
-                <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cassette-red text-white inline-block mb-2">
-                  {selectedProject.link ? "Live Deployment" : "Case Study"}
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-serif">
-                  {selectedProject.projectname}
-                </h2>
-              </div>
-            </div>
+            {/* Media Banner Carousel */}
+            {(() => {
+              const gallery = Array.isArray(selectedProject.gallery) && selectedProject.gallery.length > 0
+                ? selectedProject.gallery
+                : [selectedProject.picture];
+              const currentImg = gallery[activeProjImageIdx] || selectedProject.picture;
+
+              return (
+                <div className="relative w-full bg-ink flex flex-col shrink-0">
+                  <div className="h-64 sm:h-80 w-full relative overflow-hidden">
+                    <img
+                      src={currentImg}
+                      alt={selectedProject.projectname}
+                      className="w-full h-full object-cover transition-all duration-300"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/projects/pk-brain.png";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85" />
+                    
+                    {/* Navigation Arrows if Multiple Images */}
+                    {gallery.length > 1 && (
+                      <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none">
+                        <button
+                          onClick={() => setActiveProjImageIdx((prev) => (prev - 1 + gallery.length) % gallery.length)}
+                          className="pointer-events-auto p-2 rounded-full bg-black/60 text-white hover:bg-cassette-red transition-all backdrop-blur-xs"
+                        >
+                          <span className="material-symbols-outlined text-base">arrow_back</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveProjImageIdx((prev) => (prev + 1) % gallery.length)}
+                          className="pointer-events-auto p-2 rounded-full bg-black/60 text-white hover:bg-cassette-red transition-all backdrop-blur-xs"
+                        >
+                          <span className="material-symbols-outlined text-base">arrow_forward</span>
+                        </button>
+                      </div>
+                    )}
+
+                    <div className="absolute bottom-4 left-6 right-6 text-white">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="px-3 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cassette-red text-white inline-block">
+                          {selectedProject.link ? "Live Deployment" : "Case Study"}
+                        </span>
+                        {gallery.length > 1 && (
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/20 backdrop-blur-xs text-white">
+                            📷 {activeProjImageIdx + 1} / {gallery.length} Images
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl font-serif">
+                        {selectedProject.projectname}
+                      </h2>
+                    </div>
+                  </div>
+
+                  {/* Thumbnail Strip */}
+                  {gallery.length > 1 && (
+                    <div className="px-6 py-2.5 bg-paper-dark border-hairline-b flex items-center gap-2 overflow-x-auto">
+                      {gallery.map((imgUrl, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setActiveProjImageIdx(i)}
+                          className={`relative h-12 w-20 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
+                            activeProjImageIdx === i
+                              ? 'border-cassette-red scale-105 shadow-md'
+                              : 'border-transparent opacity-60 hover:opacity-100'
+                          }`}
+                        >
+                          <img src={imgUrl} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* Content */}
             <div className="p-8 overflow-y-auto space-y-6 flex-1">
