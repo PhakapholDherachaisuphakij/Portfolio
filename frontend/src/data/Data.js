@@ -394,12 +394,12 @@ export const portfoliodata = [
   {
     projectname: "PK Brain – Second Brain System",
     description:
-      "ศูนย์รวมความรู้ ทักษะ การงาน และเรื่องราวความก้าวหน้าของ PK บันทึกทุกอย่างไว้ที่นี่เพื่อต่อยอดในอนาคต พัฒนาด้วย Typhoon AI และ Supabase",
-    techStack: ["React", "TailwindCSS", "Node.js", "Express", "Typhoon AI", "Supabase", "Tailscale"],
+      "ศูนย์รวมสมองและศูนย์บัญชาการอัจฉริยะ (AI Command Center & Second Brain System) ของ PK ที่ทำหน้าที่เชื่อมต่อทั้ง PK Ecosystem (Portfolio, PK Movie Hub) เข้าด้วยกันอย่างสมบูรณ์แบบ ขับเคลื่อนด้วย Typhoon AI (LLM), Node.js, Express, React, TailwindCSS, Supabase Self-Hosted PostgreSQL และ Cloudinary Enterprise CDN ระบบรองรับการสกัดความรู้ภาษาไทยอัตโนมัติ (Quick Logger), การสนทนาพร้อมแนบรูปภาพหลายไฟล์ (Multimodal Vision), การอนุมัติผลงานเข้า Portfolio แบบ Zero-Git Commit, ระบบค้นหาประวัติย้อนหลัง (Chat History Sidebar), คลังความรู้ปักหมุด (Knowledge Vault with Pin/Edit), และ Portfolio Studio สำหรับบริหารจัดการข้อมูลแบบครบวงจร",
+    techStack: ["React", "TailwindCSS", "Node.js", "Express", "Typhoon AI", "Supabase", "Cloudinary CDN", "Tailscale", "Vite"],
     picture: pkbrain,
     experience:
-      "ได้พัฒนาระบบบันทึกความรู้อัจฉริยะที่สามารถจัดการข้อมูลโปรเจกต์ ทักษะ และไอเดียแบบ end-to-end พร้อมใช้ AI ช่วยวิเคราะห์ ตั้งแท็ก และสรุปข้อมูลอัตโนมัติ",
-    link: "",
+      "ได้ออกแบบและพัฒนาระบบสถาปัตยกรรมระดับองค์กร (Enterprise Hybrid Cloud Architecture) ที่ยืดหยุ่นและรองรับความผิดพลาดสูง (Fault-Tolerant): 1. Single Source of Truth: เชื่อมต่อ 3 โปรเจกต์หลัก (PK Brain, Portfolio, PK Movie Hub) ผ่าน Supabase Self-Hosted PostgreSQL เดียวกัน 2. Multi-Tier CDN & Zero-Git Deployment: แก้ปัญหารูปภาพพังข้ามเครือข่าย โดยสร้าง Pipeline อัปโหลดรูปภาพเข้า Cloudinary Enterprise CDN อัตโนมัติร่วมกับ Express Storage Proxy ทำให้รูปแสดงผลได้ 0ms ทุกอุปกรณ์ทั่วโลกโดยไม่ต้องพึ่งพา Git Commit 3. Network Resiliency & Graceful Degradation: ออกแบบระบบ AbortController ในฝั่ง Client เพื่อตัดการรอการเชื่อมต่อข้ามเครือข่ายของอุปกรณ์ที่ไม่มี Tailscale ภายใน 2.5 วินาที ทำให้ผู้เข้าชมพอร์ตโฟลิโอบน Vercel สามารถโหลดข้อมูลและรูปภาพได้อย่างราบรื่น 100% 4. AI-Driven Portfolio Automation: นำ Typhoon LLM มาสกัดบทเรียนและสร้าง Portfolio Proposals อัตโนมัติ ช่วยลดเวลาการอัปเดตผลงานจากเดิมที่ต้องเขียนโค้ดและ Push ขึ้น Git ให้เหลือเพียงการกด Approve แค่คลิกเดียว",
+    link: "http://homelab.tail7d4c51.ts.net:5174",
   },
   {
     projectname:
