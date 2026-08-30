@@ -1,11 +1,30 @@
-// Static Asset Mapping (Served directly via Vercel / Local static public folder)
+// Static Asset Mapping & Dynamic Storage Resolver (Zero Git Commit Required!)
 export const resolveImageUrl = (url, fallback = '/projects/pk-brain.png') => {
   if (!url) return fallback;
   if (url.startsWith('/')) return url;
-  if (url.includes('/storage/v1/object/public/portfolio-assets/')) {
-    const relativePart = url.split('/storage/v1/object/public/portfolio-assets/')[1];
-    return `/${decodeURIComponent(relativePart)}`;
+  if (url.startsWith('assets/') || url.startsWith('projects/') || url.startsWith('IOT/')) {
+    return `/${url}`;
   }
+  if (url.startsWith('uploads/')) {
+    return `/${url}`;
+  }
+
+  // If it's a Supabase storage URL:
+  if (url.includes('/storage/v1/object/public/')) {
+    const afterPublic = url.split('/storage/v1/object/public/')[1];
+    const subParts = afterPublic.split('/');
+    subParts.shift(); // remove bucket name
+    const relativePart = decodeURIComponent(subParts.join('/'));
+
+    // Pre-bundled static assets -> serve directly from Vercel static public
+    if (relativePart.startsWith('assets/') || relativePart.startsWith('projects/') || relativePart.startsWith('IOT/')) {
+      return `/${relativePart}`;
+    }
+
+    // Newly uploaded images (uploads/...) -> load live via URL (Zero Git Commits Needed!)
+    return url;
+  }
+
   return url;
 };
 
