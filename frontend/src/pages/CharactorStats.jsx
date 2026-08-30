@@ -9,7 +9,7 @@ import {
   experience as StaticExp,
 } from '../data/Data';
 
-const CLOUD_PROFILE_FALLBACK = `${STORAGE_BASE_URL}/assets/profil.jpg`;
+const CLOUD_PROFILE_FALLBACK = '/assets/profil.jpg';
 
 export default function CharacterStats() {
   const [profile, setProfile] = useState(StaticPlayer);
@@ -20,7 +20,12 @@ export default function CharacterStats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: pData } = await supabase.from('profiles').select('*').limit(1).maybeSingle();
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+        const { data: pData } = await supabase.from('profiles').select('*').limit(1).abortSignal(controller.signal).maybeSingle();
+        clearTimeout(timeoutId);
+
         if (pData) {
           setProfile({
             nickname: pData.nickname || StaticPlayer.nickname,
@@ -36,7 +41,7 @@ export default function CharacterStats() {
         const { data: eData } = await supabase.from('experience').select('*').order('order_idx');
         if (eData && eData.length > 0) setExperience(eData);
       } catch (err) {
-        console.error('Data error:', err);
+        console.warn('Stats live data fetch unreachable, using static CDN profile');
       }
     };
     fetchData();

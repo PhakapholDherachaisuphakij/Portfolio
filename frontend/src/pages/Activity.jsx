@@ -13,11 +13,17 @@ export default function Activity() {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
         const { data: aData, error } = await supabase
           .from('activities')
           .select('*')
           .order('order_idx', { ascending: true })
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: false })
+          .abortSignal(controller.signal);
+
+        clearTimeout(timeoutId);
 
         if (error) throw error;
         if (aData && aData.length > 0) {
@@ -40,7 +46,7 @@ export default function Activity() {
           );
         }
       } catch (err) {
-        console.warn('Activity live fetch failed, using cached fallback:', err.message);
+        console.warn('Activity live fetch unreachable, using cached static fallback');
       }
     };
     fetchActivities();

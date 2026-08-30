@@ -15,17 +15,23 @@ export default function ProjectGrid() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
         const { data, error } = await supabase
           .from('projects')
           .select('*')
           .order('order_idx', { ascending: true })
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: false })
+          .abortSignal(controller.signal);
+
+        clearTimeout(timeoutId);
 
         if (error) throw error;
         if (data && data.length > 0) {
           setProjects(
             data.map((p) => {
-              let pic = resolveImageUrl(p.image_url) || '/projects/pk-brain.png';
+              let pic = resolveImageUrl(p.image_url) || 'https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/1787993100216-e11aa45b.png';
               return {
                 projectname: p.title,
                 description: p.description,
@@ -38,7 +44,7 @@ export default function ProjectGrid() {
           );
         }
       } catch (err) {
-        console.error('Projects fetch failed:', err);
+        console.warn('Projects live fetch unreachable, using static CDN fallback');
       } finally {
         setLoading(false);
       }
