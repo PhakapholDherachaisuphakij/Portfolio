@@ -60,7 +60,7 @@ const helloworld = `${BASE_URL}/accordion/helloworld.jpg`;
 const teacher = `${BASE_URL}/accordion/Teacher.jpg`;
 const ecom = `${BASE_URL}/ecom.png`;
 const jarvisTrade1 = `/projects/jarvis-trade-1.png`;
-const pkbrain = `/projects/pk-brain.png`;
+const pkbrain = `https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/1787993100216-e11aa45b.png`;
 
 
 // IT#32 Starter Pack Images (Frontend Development Instructor)

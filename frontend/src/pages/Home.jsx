@@ -51,17 +51,23 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
         // Fetch Projects
         const { data: pData } = await supabase
           .from("projects")
           .select("*")
           .order("order_idx", { ascending: true })
-          .order("created_at", { ascending: false });
+          .order("created_at", { ascending: false })
+          .abortSignal(controller.signal);
+
+        clearTimeout(timeoutId);
 
         if (pData && pData.length > 0) {
           setProjects(
             pData.map((p) => {
-              let pic = resolveImageUrl(p.image_url) || "/projects/pk-brain.png";
+              let pic = resolveImageUrl(p.image_url) || "https://res.cloudinary.com/jngcqfcu/image/upload/v1788086012/pk-brain-uploads/1787993100216-e11aa45b.png";
               return {
                 projectname: p.title,
                 description: p.description,
