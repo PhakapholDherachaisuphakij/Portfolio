@@ -88,8 +88,8 @@ const CassetteCard = ({
           </span>
         </div>
 
-        {/* Bottom Bar: Action Link & Line */}
-        <div className="pt-3 border-t border-hairline flex items-center justify-between text-xs font-mono">
+        {/* Bottom Bar: Action Link */}
+        <div className="pt-1 flex items-center justify-between text-xs font-mono">
           <span className="text-ink-muted group-hover:text-ink font-bold flex items-center gap-1 transition-colors">
             <span>View Case Study</span>
             <span className="material-symbols-outlined text-sm group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform">
